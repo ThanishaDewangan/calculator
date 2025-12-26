@@ -14,7 +14,7 @@ func mustDate(t *testing.T, s string) time.Time {
 	return d
 }
 
-func TestCalculateAge(t *testing.T) {
+func TestCalculateAgeWithNow(t *testing.T) {
 	tests := []struct {
 		name string
 		dob  string
@@ -31,7 +31,7 @@ func TestCalculateAge(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			dob := mustDate(t, tt.dob)
 			now := mustDate(t, tt.now)
-			got := CalculateAge(dob, now)
+			got := CalculateAgeAt(dob, now)
 			if got != tt.want {
 				t.Fatalf("got %d, want %d", got, tt.want)
 			}

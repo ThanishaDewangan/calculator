@@ -17,18 +17,24 @@ func NewUserService(repo *repository.UserRepository) *UserService {
 // CalculateAge calculates age from date of birth
 // Returns the age in years based on whether the birthday has occurred this year
 func CalculateAge(dob time.Time) int {
-	now := time.Now()
+	return CalculateAgeAt(dob, time.Now())
+}
+
+// CalculateAgeAt calculates age based on a provided 'now' time (useful for deterministic tests)
+func CalculateAgeAt(dob, now time.Time) int {
 	years := now.Year() - dob.Year()
-	
-	// Check if birthday hasn't occurred this year
-	// Compare month and day to handle leap years correctly
+
 	nowMonth, nowDay := now.Month(), now.Day()
 	dobMonth, dobDay := dob.Month(), dob.Day()
-	
+
 	if nowMonth < dobMonth || (nowMonth == dobMonth && nowDay < dobDay) {
 		years--
 	}
-	
+
+	if years < 0 {
+		return 0
+	}
+
 	return years
 }
 

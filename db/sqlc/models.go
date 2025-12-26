@@ -9,8 +9,10 @@ import (
 )
 
 type User struct {
-	ID   int32     `json:"id"`
-	Name string    `json:"name"`
-	Dob  time.Time `json:"dob"`
+	ID        int32     `json:"id"`
+	Name      string    `json:"name"`
+	Dob       time.Time `json:"dob"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
